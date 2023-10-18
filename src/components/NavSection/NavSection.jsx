@@ -4,6 +4,8 @@ import { selectIsLoggedIn } from '../../redux/selectors';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/auth/authOperations';
+import Button from '@mui/material/Button';
+import { RouterLink } from '@mui/material/Link';
 
 export const NavSection = () => {
   const dispatch = useDispatch();
@@ -12,20 +14,20 @@ export const NavSection = () => {
     <header>
       <Nav>
         {isLogedIn ? (
-          <NavLink to="/contacts"> Contacts </NavLink>
+          <Button href="/contacts">Contacts</Button>
         ) : (
-          <NavLink to="/"> Home </NavLink>
+          <Button href="/">Home</Button>
         )}
 
         {isLogedIn ? (
-          <button type="button" onClick={() => dispatch(logOut())}>
+          <Button type="button" onClick={() => dispatch(logOut())}>
             Log Out
-          </button>
+          </Button>
         ) : (
           <>
-            <NavLink to="/register">Register</NavLink>
+            <Button href="/register">Sign In</Button>
 
-            <NavLink to="/login">Log In</NavLink>
+            <Button href="/login">Log In</Button>
           </>
         )}
       </Nav>

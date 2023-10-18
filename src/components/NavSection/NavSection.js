@@ -10,6 +10,7 @@ export const NavList = styled.ul`
 
 export const Nav = styled.nav`
   margin: 0 auto;
+  padding: 12px;
   max-width: 1440px;
   border-bottom: 1px solid black;
   display: flex;
