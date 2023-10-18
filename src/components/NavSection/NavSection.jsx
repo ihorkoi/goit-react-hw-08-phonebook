@@ -13,11 +13,11 @@ export const NavSection = () => {
     <header>
       <Nav>
         {isLogedIn ? (
-          <Button component={RouterLink} href="/contacts">
+          <Button component={RouterLink} to="/contacts">
             Contacts
           </Button>
         ) : (
-          <Button component={RouterLink} href="/">
+          <Button component={RouterLink} to="/">
             Home
           </Button>
         )}
@@ -32,11 +32,11 @@ export const NavSection = () => {
           </Button>
         ) : (
           <>
-            <Button component={RouterLink} href="/register">
+            <Button component={RouterLink} to="/register">
               Sign In
             </Button>
 
-            <Button component={RouterLink} href="/login">
+            <Button component={RouterLink} to="/login">
               Log In
             </Button>
           </>
