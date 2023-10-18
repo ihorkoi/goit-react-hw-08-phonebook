@@ -3,6 +3,7 @@ import { Nav } from './NavSection';
 import { selectIsLoggedIn } from '../../redux/selectors';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/auth/authOperations';
+import { Link as RouterLink } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 export const NavSection = () => {
@@ -12,20 +13,32 @@ export const NavSection = () => {
     <header>
       <Nav>
         {isLogedIn ? (
-          <Button href="/contacts">Contacts</Button>
+          <Button component={RouterLink} href="/contacts">
+            Contacts
+          </Button>
         ) : (
-          <Button href="/">Home</Button>
+          <Button component={RouterLink} href="/">
+            Home
+          </Button>
         )}
 
         {isLogedIn ? (
-          <Button type="button" onClick={() => dispatch(logOut())}>
+          <Button
+            component={RouterLink}
+            type="button"
+            onClick={() => dispatch(logOut())}
+          >
             Log Out
           </Button>
         ) : (
           <>
-            <Button href="/register">Sign In</Button>
+            <Button component={RouterLink} href="/register">
+              Sign In
+            </Button>
 
-            <Button href="/login">Log In</Button>
+            <Button component={RouterLink} href="/login">
+              Log In
+            </Button>
           </>
         )}
       </Nav>
