@@ -7,7 +7,7 @@ import {
   updateContact,
 } from 'redux/contacts/contactsOperations';
 import { selectContacts } from 'redux/selectors';
-import { Box, TextField, Button, IconButton } from '@mui/material';
+import { Box, TextField, Button, IconButton, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 const contactsEditSchema = Yup.object().shape({
@@ -67,7 +67,7 @@ export const ModalWindow = ({
     >
       <IconButton
         onClick={closeModal}
-        sx={{ position: 'relative', left: '80%' }}
+        sx={{ position: 'absolute', left: '80%', top: '5%' }}
       >
         <CloseIcon />
       </IconButton>
@@ -82,6 +82,7 @@ export const ModalWindow = ({
             justifyContent: 'center',
           }}
         >
+          <Typography>Edit contact</Typography>
           <TextField
             id="name"
             size="small"

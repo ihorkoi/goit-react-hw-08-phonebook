@@ -1,4 +1,4 @@
-import { Input } from './Filter.styled';
+import { TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/contacts/contactsSlice';
 
@@ -7,9 +7,10 @@ export const Filter = () => {
 
   return (
     <>
-      <h2>Find your contacts by name</h2>
-      <Input
-        type="tel"
+      <TextField
+        size="small"
+        type="text"
+        label="Search"
         onChange={evt => {
           dispatch(setFilter(evt.target.value.trim()));
         }}
