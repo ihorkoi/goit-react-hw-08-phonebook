@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { ListItem, Button, Number } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteContact,
@@ -15,6 +14,7 @@ export const ContactsList = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilterValue);
   const dispatch = useDispatch();
+
   const [modalIsOpen, setIsOpen] = useState(false);
   const [contactId, setContactId] = useState('');
 
@@ -22,9 +22,7 @@ export const ContactsList = () => {
     setIsOpen(true);
     setContactId(id);
   };
-  const afterOpenModal = () => {
-    return;
-  };
+
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -78,7 +76,6 @@ export const ContactsList = () => {
       </List>
       <ModalWindow
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}

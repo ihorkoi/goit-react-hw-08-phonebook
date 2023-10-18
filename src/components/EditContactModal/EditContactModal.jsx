@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -7,17 +7,19 @@ import {
   updateContact,
 } from 'redux/contacts/contactsOperations';
 import { selectContacts } from 'redux/selectors';
+import { Box, TextField, Button, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-const SignupSchema = Yup.object().shape({
+const contactsEditSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
+  number: Yup.string().required('Required'),
 });
 
 export const ModalWindow = ({
   isOpen,
-  onAfterOpen,
   onRequestClose,
   closeModal,
   contactId,
@@ -26,6 +28,9 @@ export const ModalWindow = ({
 
   const dispatch = useDispatch();
   const customStyles = {
+    overlay: {
+      zIndex: '10',
+    },
     content: {
       top: '50%',
       left: '50%',
@@ -35,43 +40,74 @@ export const ModalWindow = ({
       transform: 'translate(-50%, -50%)',
     },
   };
+  const formik = useFormik({
+    initialValues: { name: '', number: '' },
+    validationSchema: contactsEditSchema,
+    onSubmit: (update, { resetForm }) => {
+      const alreadyIn = contacts.find(
+        ({ name }) => name.toLowerCase() === update.name.toLowerCase()
+      );
+      if (alreadyIn) {
+        alert(`${update.name} is already in contacts`);
+        resetForm();
+        return;
+      }
+      dispatch(updateContact({ ...update, id: contactId }));
+      resetForm();
+      dispatch(fetchContacts());
+    },
+  });
   return (
     <Modal
       isOpen={isOpen}
-      onAfterOpen={onAfterOpen}
       onRequestClose={onRequestClose}
       style={customStyles}
       contentLabel="Example Modal"
       ariaHideApp={false}
     >
-      <button onClick={closeModal}>close</button>
-      <Formik
-        initialValues={{ name: '', number: '', id: '' }}
-        validationSchema={SignupSchema}
-        onSubmit={(update, { resetForm }) => {
-          const alreadyIn = contacts.find(
-            ({ name }) => name.toLowerCase() === update.name.toLowerCase()
-          );
-          if (alreadyIn) {
-            alert(`${update.name} is already in contacts`);
-            resetForm();
-            return;
-          }
-          dispatch(updateContact({ ...update, id: contactId }));
-          resetForm();
-          dispatch(fetchContacts());
-        }}
+      <IconButton
+        onClick={closeModal}
+        sx={{ position: 'relative', left: '80%' }}
       >
-        <Form>
-          <p>Name</p>
-          <Field type="text" name="name" />
-          <ErrorMessage name="text" component="div" />
-          <p>Phone</p>
-          <Field type="tel" name="number" />
-          <ErrorMessage name="tel" component="div" />
-          <button type="submit">Submit</button>
-        </Form>
-      </Formik>
+        <CloseIcon />
+      </IconButton>
+
+      <form onSubmit={formik.handleSubmit}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <TextField
+            id="name"
+            size="small"
+            type="text"
+            name="name"
+            label="Name"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            error={formik.touched.name && Boolean(formik.errors.name)}
+            helperText={formik.touched.name && formik.errors.name}
+          />
+          <TextField
+            size="small"
+            type="tel"
+            name="number"
+            label="Phone"
+            onChange={formik.handleChange}
+            value={formik.values.number}
+            error={formik.touched.number && Boolean(formik.errors.number)}
+            helperText={formik.touched.number && formik.errors.number}
+          />
+          <Button variant="contained" type="submit" size="small">
+            Submit
+          </Button>
+        </Box>
+      </form>
     </Modal>
   );
 };

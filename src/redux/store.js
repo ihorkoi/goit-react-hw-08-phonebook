@@ -31,16 +31,4 @@ export const store = configureStore({
     });
   },
 });
-
-// export const store = configureStore({
-//   reducer: { contacts: contactsReducer },
-//   middleware(getDefaultMiddleware) {
-//     return getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-//     });
-//   },
-// });
-
 export const persistor = persistStore(store);

@@ -1,12 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
-// import { FormContact, Input, Button } from './ContactForm.styled';
 import { addContact } from 'redux/contacts/contactsOperations';
 import { selectContacts } from 'redux/selectors';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Box, TextField, Button } from '@mui/material';
-
-// import { Button } from './ContactForm.styled';
 
 const contactsSubmitSchema = Yup.object().shape({
   name: Yup.string()
