@@ -15,7 +15,7 @@ export const ContactForm = () => {
 
     const newContact = {
       name: name.value,
-      phone: number.value,
+      number: number.value,
     };
     const alreadyIn = contacts.find(
       ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
