@@ -3,16 +3,18 @@ import { ListItem, Button, Number } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, fetchContacts } from 'redux/operations';
 import { selectContacts, selectFilterValue } from 'redux/selectors';
-import { ModalWindow } from 'components/EditcontactModal/EditContactModal';
+import { ModalWindow } from 'components/EditContactModal/EditContactModal';
 
 export const ContactsList = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilterValue);
   const dispatch = useDispatch();
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [contactId, setContactId] = useState('');
 
-  const openModal = () => {
+  const openModal = id => {
     setIsOpen(true);
+    setContactId(id);
   };
   const afterOpenModal = () => {
     return;
@@ -34,7 +36,13 @@ export const ContactsList = () => {
           return (
             <ListItem key={id}>
               {name}: <Number>{number}</Number>
-              <Button onClick={openModal}>Edit</Button>
+              <Button
+                onClick={() => {
+                  openModal(id);
+                }}
+              >
+                Edit
+              </Button>
               <Button onClick={() => dispatch(deleteContact(id))}>
                 Delete
               </Button>
@@ -48,6 +56,7 @@ export const ContactsList = () => {
         onRequestClose={closeModal}
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
+        contactId={contactId}
       ></ModalWindow>
     </div>
   );

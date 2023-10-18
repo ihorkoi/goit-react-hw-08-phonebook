@@ -30,7 +30,7 @@ export const RegisterPage = () => {
       >
         <Form action="">
           <p>Name</p>
-          <Field type="name" name="name" />
+          <Field type="text" name="name" />
           <ErrorMessage name="name" component="div" />
           <p>Email</p>
           <Field type="email" name="email" />

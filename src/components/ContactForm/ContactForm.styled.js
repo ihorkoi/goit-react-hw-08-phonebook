@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const FormContact = styled.form`
   display: flex;
   width: 300px;
   padding: 24px;

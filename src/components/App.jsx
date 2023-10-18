@@ -8,11 +8,11 @@ import { RestrictedRoute } from './RestrictedRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { Routes, Route } from 'react-router-dom';
 
-import { Home } from '../pages/Home';
-import { Layout } from '../pages/Layout';
+import { Home } from '../pages/Home/Home';
+import { Layout } from '../pages/Layout/Layout';
 import { ContactPage } from '../pages/ContactPage/ContactPage';
-import { LoginPage } from '../pages/LoginPage';
-import { RegisterPage } from '../pages/RegisterPage';
+import { LoginPage } from '../pages/LoginPage/LoginPage';
+import { RegisterPage } from '../pages/RegisterPage/RegisterPage';
 
 export const App = () => {
   const dispatch = useDispatch();

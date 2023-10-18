@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
-import { NavSection } from '../components/NavSection/NavSection.jsx';
+import { NavSection } from '../../components/NavSection/NavSection.jsx';
 
 export const Layout = () => {
   return (
