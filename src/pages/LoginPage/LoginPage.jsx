@@ -1,5 +1,5 @@
 import { Box, Button, TextField } from '@mui/material';
-import { Formik, Field, ErrorMessage, Form, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/authOperations';
 import * as Yup from 'yup';
@@ -20,7 +20,7 @@ export const LoginPage = () => {
       password: '',
     },
     validationSchema: logInSchema,
-    onSubmit: (user, { resetForm }) => {
+    onSubmit: user => {
       dispatch(logIn(user));
     },
   });

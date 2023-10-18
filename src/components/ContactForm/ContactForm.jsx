@@ -2,10 +2,13 @@ import { useSelector, useDispatch } from 'react-redux';
 // import { FormContact, Input, Button } from './ContactForm.styled';
 import { addContact } from 'redux/contacts/contactsOperations';
 import { selectContacts } from 'redux/selectors';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Box, TextField, Button } from '@mui/material';
 
-const SignupSchema = Yup.object().shape({
+// import { Button } from './ContactForm.styled';
+
+const contactsSubmitSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
@@ -16,32 +19,68 @@ export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
-  return (
-    <Formik
-      initialValues={{ name: '', number: '' }}
-      validationSchema={SignupSchema}
-      onSubmit={(newContact, { resetForm }) => {
-        const alreadyIn = contacts.find(
-          ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
-        );
-        if (alreadyIn) {
-          alert(`${newContact.name} is already in contacts`);
-          resetForm();
-          return;
-        }
-        dispatch(addContact(newContact));
+  const formik = useFormik({
+    initialValues: { name: '', number: '' },
+    validationSchema: contactsSubmitSchema,
+    onSubmit: (newContact, { resetForm }) => {
+      const alreadyIn = contacts.find(
+        ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
+      );
+      if (alreadyIn) {
+        alert(`${newContact.name} is already in contacts`);
         resetForm();
-      }}
-    >
-      <Form>
-        <p>Name</p>
-        <Field type="text" name="name" />
-        <ErrorMessage name="name" component="div" />
-        <p>Phone</p>
-        <Field type="tel" name="number" />
-        <ErrorMessage name="tel" component="div" />
-        <button>Add contact</button>
-      </Form>
-    </Formik>
+        return;
+      }
+      dispatch(addContact(newContact));
+      resetForm();
+    },
+  });
+
+  return (
+    <div>
+      <Box
+        sx={{
+          textAlign: 'center',
+        }}
+      >
+        <h1>Contacts</h1>
+        <form onSubmit={formik.handleSubmit}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <TextField
+              id="name"
+              size="small"
+              type="text"
+              name="name"
+              label="Name"
+              onChange={formik.handleChange}
+              value={formik.values.name}
+              error={formik.touched.name && Boolean(formik.errors.name)}
+              helperText={formik.touched.name && formik.errors.name}
+            />
+            <TextField
+              size="small"
+              type="tel"
+              name="number"
+              label="Phone"
+              onChange={formik.handleChange}
+              value={formik.values.number}
+              error={formik.touched.number && Boolean(formik.errors.number)}
+              helperText={formik.touched.number && formik.errors.number}
+            />
+            <Button variant="contained" type="submit" size="small">
+              Submit
+            </Button>
+          </Box>
+        </form>
+      </Box>
+    </div>
   );
 };

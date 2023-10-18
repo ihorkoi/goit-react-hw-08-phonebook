@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux';
 import { Nav } from './NavSection';
 import { selectIsLoggedIn } from '../../redux/selectors';
-import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../redux/auth/authOperations';
 import Button from '@mui/material/Button';
-import { RouterLink } from '@mui/material/Link';
 
 export const NavSection = () => {
   const dispatch = useDispatch();

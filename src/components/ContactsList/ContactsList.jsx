@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ListItem, Button, Number } from './ContactList.styled';
+// import { ListItem, Button, Number } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteContact,
@@ -7,6 +7,9 @@ import {
 } from 'redux/contacts/contactsOperations';
 import { selectContacts, selectFilterValue } from 'redux/selectors';
 import { ModalWindow } from 'components/EditContactModal/EditContactModal';
+import { Box, IconButton, List, ListItem, Typography } from '@mui/material';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ContactsList = () => {
   const contacts = useSelector(selectContacts);
@@ -34,25 +37,45 @@ export const ContactsList = () => {
   );
   return (
     <div>
-      <ul>
+      <List>
         {filteredContacts.map(({ name, id, number }) => {
           return (
-            <ListItem key={id}>
-              {name}: <Number>{number}</Number>
-              <Button
-                onClick={() => {
-                  openModal(id);
-                }}
+            <ListItem
+              key={id}
+              sx={{
+                width: '400px',
+                marginBottom: '12px',
+                alignItems: 'baseline',
+                justifyContent: 'space-between',
+                border: '1px solid rgba(0, 0, 0, 0.33)',
+                borderRadius: '8px',
+              }}
+            >
+              <Typography sx={{ fontWeight: '400', fontSize: '20px' }}>
+                {name}
+              </Typography>
+              :
+              <Typography
+                sx={{ fontWeight: '200', fontSize: '16px', marginLeft: '12px' }}
               >
-                Edit
-              </Button>
-              <Button onClick={() => dispatch(deleteContact(id))}>
-                Delete
-              </Button>
+                {number}
+              </Typography>
+              <Box sx={{ marginLeft: 'auto' }}>
+                <IconButton
+                  onClick={() => {
+                    openModal(id);
+                  }}
+                >
+                  <ModeEditIcon />
+                </IconButton>
+                <IconButton onClick={() => dispatch(deleteContact(id))}>
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
             </ListItem>
           );
         })}
-      </ul>
+      </List>
       <ModalWindow
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
