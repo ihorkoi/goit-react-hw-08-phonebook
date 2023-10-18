@@ -2,7 +2,10 @@ import Modal from 'react-modal';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, updateContact } from 'redux/operations';
+import {
+  fetchContacts,
+  updateContact,
+} from 'redux/contacts/contactsOperations';
 import { selectContacts } from 'redux/selectors';
 
 const SignupSchema = Yup.object().shape({

@@ -4,8 +4,7 @@ import {
   addContact,
   deleteContact,
   updateContact,
-  logOut,
-} from '../operations';
+} from './contactsOperations.js';
 
 const handlePending = state => {
   state.contacts.isLoading = true;
@@ -57,11 +56,7 @@ const contactsSlice = createSlice({
         );
         state.error = null;
       })
-      .addCase(logOut.fulfilled, state => {
-        state.contacts.items = [];
-        state.contacts.isLoading = false;
-        state.error = null;
-      })
+
       .addCase(fetchContacts.rejected, handleRejected)
       .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.rejected, handleRejected)

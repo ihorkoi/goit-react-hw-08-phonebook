@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import { useEffect } from 'react';
-import { refreshUser } from 'redux/operations';
+import { refreshUser } from 'redux/auth/authOperations';
 
 import { useAuth } from './useAuth';
 import { RestrictedRoute } from './RestrictedRoute';
@@ -51,31 +51,5 @@ export const App = () => {
         />
       </Route>
     </Routes>
-    // <div
-    //   style={{
-    //     // height: '100vh',
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     fontSize: 40,
-    //     color: '#010101',
-    //   }}
-    // >
-    //   <NavSection />
-    //   <h1>Phonebook</h1>
-    //   <ContactForm />
-    //   {isLoading && !error ? (
-    //     <b>Request in progress...</b>
-    //   ) : contacts.length === 0 ? (
-    //     <p>You don`t have any contact yet</p>
-    //   ) : (
-    //     <>
-    //       <h2>Contacts</h2>
-    //       <Filter></Filter>
-    //       <ContactsList />
-    //     </>
-    //   )}
-    // </div>
   );
 };

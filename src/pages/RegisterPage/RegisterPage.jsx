@@ -1,6 +1,6 @@
 import { Formik, Field, ErrorMessage, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { registerUser } from 'redux/operations';
+import { registerUser } from 'redux/auth/authOperations';
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({

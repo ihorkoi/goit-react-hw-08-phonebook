@@ -9,6 +9,12 @@ export const NavList = styled.ul`
 `;
 
 export const Nav = styled.nav`
-  width: 1440px;
+  margin: 0 auto;
+  max-width: 1440px;
   border-bottom: 1px solid black;
+  display: flex;
+  gap: 24px;
+  :first-child {
+    margin-right: auto;
+  }
 `;

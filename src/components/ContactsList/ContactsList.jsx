@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { ListItem, Button, Number } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact, fetchContacts } from 'redux/operations';
+import {
+  deleteContact,
+  fetchContacts,
+} from 'redux/contacts/contactsOperations';
 import { selectContacts, selectFilterValue } from 'redux/selectors';
 import { ModalWindow } from 'components/EditContactModal/EditContactModal';
 
