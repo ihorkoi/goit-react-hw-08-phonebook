@@ -37,7 +37,7 @@ export const RegisterPage = () => {
         textAlign: 'center',
       }}
     >
-      <h1>Sign in</h1>
+      <h1>Sign Up</h1>
 
       <form onSubmit={formik.handleSubmit}>
         <Box
@@ -81,7 +81,7 @@ export const RegisterPage = () => {
             helperText={formik.touched.password && formik.errors.password}
           />
           <Button variant="outlined" type="submit">
-            Submit
+            Sign Up
           </Button>
         </Box>
       </form>

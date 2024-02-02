@@ -33,7 +33,7 @@ export const NavSection = () => {
         ) : (
           <>
             <Button component={RouterLink} to="/register">
-              Sign In
+              Sign Up
             </Button>
 
             <Button component={RouterLink} to="/login">

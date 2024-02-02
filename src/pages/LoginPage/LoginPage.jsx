@@ -62,7 +62,7 @@ export const LoginPage = () => {
             helperText={formik.touched.password && formik.errors.password}
           />
           <Button variant="outlined" type="submit">
-            Submit
+            Log In
           </Button>
         </Box>
       </form>
