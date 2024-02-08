@@ -20,7 +20,6 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(refreshUser());
-    // fetch('https://phonebook-csua.onrender.com/api/').then(() => {});
   }, [dispatch]);
 
   return isRefreshing ? (
